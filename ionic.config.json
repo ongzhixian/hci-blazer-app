@@ -1,0 +1,7 @@
+{
+  "name": "Borrows and Returns",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
