@@ -13,4 +13,9 @@ export class Tab3Page {
   signOut() {
     this.authenticationService.signOut();
   }
+
+  changePassword() {
+
+  }
+
 }
