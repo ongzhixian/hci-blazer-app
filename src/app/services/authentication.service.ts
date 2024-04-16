@@ -13,6 +13,12 @@ interface UserData {
   providedIn: 'root'
 })
 export class AuthenticationService {
+  async signOut() {
+    this.authenticatedUser = null;
+    await this.appStorage.remove('authenticatedUserData');
+    this.router.navigate(['/login']);
+    //throw new Error('Method not implemented.');
+  }
 
   private authenticatedUser: UserData | null = null;
 
