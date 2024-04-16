@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { credentialsInterceptor } from './interceptors/credentials.interceptor';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { credentialsInterceptor } from './interceptors/credentials.interceptor';
     , IonicModule.forRoot()
     , AppRoutingModule
     , HttpClientModule
+    , IonicStorageModule.forRoot()
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

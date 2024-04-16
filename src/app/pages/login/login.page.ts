@@ -33,7 +33,8 @@ export class LoginPage implements OnInit {
       this.loginFormGroup.value.email
       , this.loginFormGroup.value.password);
 
-    //this.router.navigate(['/logout']);
+    
+    
   }
   // get email() {
 	// 	return this.credentials.get('email');
