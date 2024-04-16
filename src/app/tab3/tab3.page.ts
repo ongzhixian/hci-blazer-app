@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,8 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+  @ViewChild(IonModal) modal!: IonModal;
 
   constructor(private authenticationService: AuthenticationService) {}
 
@@ -17,5 +20,12 @@ export class Tab3Page {
   changePassword() {
 
   }
+  
+  confirm() {
+    this.modal.dismiss(null, 'confirm');
+  }
 
+  dismiss() {
+    this.modal.dismiss(null, 'dismiss');  
+  }
 }

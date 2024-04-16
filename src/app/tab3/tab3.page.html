@@ -75,11 +75,12 @@
     <ion-card-content>
       <p>Your password was last updated 3 days ago</p>
 
-      <ion-button (click)="changePassword()" class="ion-padding">
+      <ion-button id="open-modal" expand="block" class="ion-padding">
         Change password
         <ion-icon slot="end" name="key"></ion-icon>
       </ion-button>
 
+      <!-- <ion-button id="open-modal" expand="block">Open</ion-button> -->
     </ion-card-content>
 
   </ion-card>
@@ -93,4 +94,27 @@
     the Javan rhino and one-horned rhino have one horn.
   </p>
 
+  
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Confirm Your Details</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>
+          Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
+          <strong>cancel</strong> to dismiss this modal.
+        </p>
+        <ion-button class="ion-margin" shape="round" expand="full" fill="outline" (click)="dismiss()"
+          >Cancel</ion-button
+        >
+        <ion-button class="ion-margin" shape="round" expand="full" (click)="confirm()"
+          >Confirm</ion-button
+        >
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>
