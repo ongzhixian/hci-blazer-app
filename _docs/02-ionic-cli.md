@@ -117,7 +117,7 @@ npm install -g @ionic/cli@6.20.9
 For other stuff, just a sidenote:
 npm install @ionic/angular@v6-lts
 npm install @ionic/vue@v6-lts @ionic/vue-router@v6-lts
-
+npm install @ionic/storage-angular
 
 ## Live Reload
 
