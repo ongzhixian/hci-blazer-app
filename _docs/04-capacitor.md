@@ -26,6 +26,7 @@ ionic cap sync
 ## Add plugins
 
 npm install @capacitor/camera @capacitor/preferences @capacitor/filesystem
+npm install @ionic/storage-angular
 npm install @capacitor-mlkit/barcode-scanning
 
 ## Open IDEs

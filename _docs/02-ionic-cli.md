@@ -116,6 +116,8 @@ npm uninstall -g ionic
 npm uninstall -g @ionic/cli
 npm install -g @ionic/cli@6.20.9
 
+npm install @ionic/storage-angular
+
 
 For other stuff, just a sidenote:
 npm install @ionic/angular@v6-lts
