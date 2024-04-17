@@ -14,6 +14,8 @@ ionic cap copy
 ionic cap sync
 ionic cap open android
 
+
+
 ## tldr;
 
 ionic generate page pages/login
@@ -115,6 +117,19 @@ npm install -g @ionic/cli@6.20.9
 For other stuff, just a sidenote:
 npm install @ionic/angular@v6-lts
 npm install @ionic/vue@v6-lts @ionic/vue-router@v6-lts
+
+
+## Live Reload
+
+adb devices 
+
+native-run android --list
+
+$env:ANDROID_SDK_ROOT="C:\Apps\Android\sdk"
+
+ionic cap run android --list
+
+ionic cap run android -l --external
 
 ## References
 
