@@ -24,7 +24,7 @@ ionic generate service services/authentication
 ionic generate guard guards/auth --implements CanLoad
 ionic generate guard guards/intro --implements CanLoad
 ionic generate guard guards/autoLogin --implements CanLoad
-ionic generate interceptor interceptors/credentials
+ng generate interceptor interceptors/credentials
 
 ## 
 
@@ -92,6 +92,9 @@ ionic cap sync
 ## Generate service
 
 ionic g service services/photo
+
+ionic generate guard guards/auth
+
 
 ## Support for mobile
 
