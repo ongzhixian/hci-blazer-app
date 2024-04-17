@@ -53,3 +53,33 @@ Commands:
   ng g service-worker           Pass this schematic to the "run" command to create a service worker
   ng g web-worker [name]        Creates a new, generic web worker definition in the given project.
 ```
+
+
+## Run
+
+ionic serve
+
+## Build (for deployment)
+
+ionic build
+
+Every time you perform a build (e.g. ionic build) that updates your web directory (default: www), you'll need to copy those changes into your native projects:
+
+
+ionic cap copy
+
+Note: After making updates to the native portion of the code (such as adding a new plugin), use the sync command:
+
+ionic cap sync
+
+
+## Generate service
+
+ionic g service services/photo
+
+## Support for mobile
+
+ionic cap add ios
+ionic cap add android
+
+## References
