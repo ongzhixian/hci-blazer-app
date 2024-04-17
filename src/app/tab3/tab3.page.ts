@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { IonModal } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab3',
@@ -11,21 +12,32 @@ export class Tab3Page {
 
   @ViewChild(IonModal) modal!: IonModal;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  updatePasswordFormGroup: FormGroup = this.fb.group({
+    password: ['password12345', [Validators.required, Validators.minLength(6)]],
+    passwordConfirmation: ['password12345', [Validators.required, Validators.minLength(6)]]
+  });
+
+  constructor(private authenticationService: AuthenticationService
+    , private fb: FormBuilder
+  ) {}
 
   signOut() {
     this.authenticationService.signOut();
   }
 
-  changePassword() {
+  // change-password-modal
 
-  }
-  
-  confirm() {
-    this.modal.dismiss(null, 'confirm');
-  }
+  // confirm() {
+  //   this.modal.dismiss(null, 'confirm');
+  // }
 
   dismiss() {
+    console.log("Dismiss change password dialog");
     this.modal.dismiss(null, 'dismiss');  
+  }
+
+  updatePassword() {
+    console.log(`In updatePassword() ${this.updatePasswordFormGroup.value.password} ${this.updatePasswordFormGroup.value.passwordConfirmation}`);
+    this.modal.dismiss(null, 'confirm');
   }
 }

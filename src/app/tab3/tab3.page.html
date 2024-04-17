@@ -75,8 +75,8 @@
     <ion-card-content>
       <p>Your password was last updated 3 days ago</p>
 
-      <ion-button id="open-modal" expand="block" class="ion-padding">
-        Change password
+      <ion-button id="update-password-modal" expand="block" class="ion-padding">
+        Update password
         <ion-icon slot="end" name="key"></ion-icon>
       </ion-button>
 
@@ -95,26 +95,68 @@
   </p>
 
   
-  <ion-modal #modal trigger="open-modal">
+  <ion-modal #modal trigger="update-password-modal">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Confirm Your Details</ion-title>
+          <ion-title>Update password</ion-title>
         </ion-toolbar>
       </ion-header>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-grid>
+            <ion-row>
+              <ion-col size-sm="3">
+                <ion-button class="ion-margin" shape="round" expand="full" fill="outline" (click)="dismiss()">Cancel</ion-button>
+              </ion-col>
+              <ion-col size-sm="3">
+                <ion-button class="ion-margin" shape="round" expand="full" (click)="updatePassword()">Confirm</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+      </ion-footer>
+
       <ion-content class="ion-padding">
         <p>
-          Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
-          <strong>cancel</strong> to dismiss this modal.
+          Enter the new value for your password in the 2 text fields below. 
+          
+          <!-- Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
+          <strong>cancel</strong> to dismiss this modal. -->
         </p>
-        <ion-button class="ion-margin" shape="round" expand="full" fill="outline" (click)="dismiss()"
-          >Cancel</ion-button
-        >
-        <ion-button class="ion-margin" shape="round" expand="full" (click)="confirm()"
-          >Confirm</ion-button
-        >
+        <p>Passwords should meet the following requirements:</p>
+
+        <ol>
+          <li>8 or more characters</li>
+          <li>Has upper-case characters</li>
+          <li>Has lower-case characters</li>
+          <li>Has number characters</li>
+        </ol>
+
+        <form (ngSubmit)="updatePassword()" [formGroup]="updatePasswordFormGroup">
+          <ion-item>
+            <ion-input labelPlacement="stacked" type="password" formControlName="password" placeholder="Enter new password">
+              <div slot="label">Password <ion-text color="danger">(Required)</ion-text></div>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            Enter your password again to ensure that there are no typing errors.
+          </ion-item>
+          <ion-item>
+            <ion-input labelPlacement="stacked" type="password" formControlName="passwordConfirmation" placeholder="Repeat new password">
+              <div slot="label">Confirmation <ion-text color="danger">(Required)</ion-text></div>
+            </ion-input>
+          </ion-item>
+        </form>
+
+        &nbsp;
+
+        
+        
       </ion-content>
     </ng-template>
   </ion-modal>
   
 </ion-content>
+
