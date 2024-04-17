@@ -82,4 +82,26 @@ ionic g service services/photo
 ionic cap add ios
 ionic cap add android
 
+
+## Using older versions of Ionic 
+
+npm info @ionic/cli
+
+See `https://registry.npmjs.org/@ionic/cli/` (versions section in JSON) for list of available versions
+
+To use older version of Ionic (latest is 7.2.0 on 2024-04-17), we need to:
+1.  uninstall the default current version, 
+2.  install the version that we want (6.20.9)
+
+npm uninstall -g ionic
+npm uninstall -g @ionic/cli
+npm install -g @ionic/cli@6.20.9
+
+
+For other stuff, just a sidenote:
+npm install @ionic/angular@v6-lts
+npm install @ionic/vue@v6-lts @ionic/vue-router@v6-lts
+
 ## References
+
+
