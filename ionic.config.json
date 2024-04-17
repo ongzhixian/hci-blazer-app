@@ -1,0 +1,7 @@
+{
+  "name": "hci-blazer-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
