@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Barcode, BarcodeFormat, BarcodeScanner, ScanOptions } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -18,6 +18,7 @@ export class Tab2Page implements OnInit {
     BarcodeScanner.isSupported().then((result) => {
       this.isSupported = result.supported;
     });
+    
   }
   
   async scan(): Promise<void> {
@@ -26,7 +27,18 @@ export class Tab2Page implements OnInit {
       this.presentAlert();
       return;
     }
+    
+    
+    let scanOptions:ScanOptions = {
+      formats: [BarcodeFormat.QrCode, BarcodeFormat.Code39],
+    }
+
     const { barcodes } = await BarcodeScanner.scan();
+
+    barcodes.forEach((barcode) => {
+      console.log(`barcode ${barcode.format} | val=${barcode.valueType} | disp=${barcode.displayValue} | raw=${barcode.rawValue} `);
+    });
+
     this.barcodes.push(...barcodes);
   }
 

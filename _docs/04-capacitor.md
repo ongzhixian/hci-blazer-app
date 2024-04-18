@@ -53,6 +53,20 @@ https://capacitorjs.com/docs/config
 https://capacitorjs.com/docs/android/configuration
 
 
+
+## @capacitor-mlkit/barcode-scanning
+
+Modifications to be made to AndroidManifest.xml
+
+Within application tag:
+<meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui" />
+
+After application tag
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.FLASHLIGHT" />
+
 ## Reference
 
 https://stackoverflow.com/questions/3920595/app-installations-overwriting-each-other
