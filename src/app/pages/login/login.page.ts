@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router
     , private fb: FormBuilder
-    //, private authenticationService: AuthenticationService
+    , private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -28,9 +28,9 @@ export class LoginPage implements OnInit {
   signIn() {
     console.log(`Attempting to sign-in ${this.loginFormGroup.value.email}, ${this.loginFormGroup.value['password']}`);
 
-    // this.authenticationService.authenticateUser(
-    //   this.loginFormGroup.value.email
-    //   , this.loginFormGroup.value.password);
+    this.authenticationService.authenticateUser(
+      this.loginFormGroup.value.email
+      , this.loginFormGroup.value.password);
   }
 
 }
