@@ -15,6 +15,10 @@ ionic cap sync
 ionic cap open android
 
 
+npm install -g @ionic/cli native-run cordova-res
+ionic cordova resources
+https://ionic.io/blog/automating-icons-and-splash-screens
+
 
 ## tldr;
 
