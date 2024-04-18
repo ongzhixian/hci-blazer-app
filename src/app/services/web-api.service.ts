@@ -10,6 +10,7 @@ export class WebApiService {
 
   constructor() {
     this.baseUrl = "http://localhost:7265";
+    this.baseUrl = "http://192.168.79.11:80";
   }
 
   UrlFor(key:string) {
