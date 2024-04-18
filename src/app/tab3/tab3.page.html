@@ -1,17 +1,162 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="signOut()">
+        Log out
+        <ion-icon slot="end" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Tab 3
+      User Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">User Profile</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 342 page"></app-explore-container>
+  <ion-card class="ion-padding">
+    <!-- <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" /> -->
+    <ion-avatar style="margin: auto;">
+      <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+    <ion-card-header>
+      <ion-card-title>Ong Zhi Xian</ion-card-title>
+      <ion-card-subtitle>Zhixian</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+
+      <ion-list>
+
+        <ion-item>
+          <ion-label>Zhi Xian</ion-label>
+          <ion-note slot="end">First Name</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Ong</ion-label>
+          <ion-note slot="end">Last Name</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>45</ion-label>
+          <ion-note slot="end">Age</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Male</ion-label>
+          <ion-note slot="end">Gender</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Software Engineer</ion-label>
+          <ion-note slot="end">Occupation</ion-note>
+        </ion-item>
+
+        &nbsp;
+        <p>Please contact your administrator if there are errors in profile.</p>
+      </ion-list>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>Security</ion-card-title>
+      <!-- <ion-card-subtitle>Zhixian</ion-card-subtitle> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Your password was last updated 3 days ago</p>
+
+      <ion-button id="update-password-modal" expand="block" class="ion-padding">
+        Update password
+        <ion-icon slot="end" name="key"></ion-icon>
+      </ion-button>
+
+      <!-- <ion-button id="open-modal" expand="block">Open</ion-button> -->
+    </ion-card-content>
+
+  </ion-card>
+
+  <h2>Fun fact</h2>
+
+  <p>
+    The rhinoceros gets its name from one of its most notable features: its horns. The word rhinoceros come from the
+    Greek words rhino meaning “nose” and ceros meaning “horn.” The number of horns that a rhino has varies on the
+    species. The two African species (the black rhino and the white rhino) and the Sumatran rhino have two horns, while
+    the Javan rhino and one-horned rhino have one horn.
+  </p>
+
+  
+  <ion-modal #modal trigger="update-password-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Update password</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-grid>
+            <ion-row>
+              <ion-col size-sm="3">
+                <ion-button class="ion-margin" shape="round" expand="full" fill="outline" (click)="dismiss()">Cancel</ion-button>
+              </ion-col>
+              <ion-col size-sm="3">
+                <ion-button class="ion-margin" shape="round" expand="full" (click)="updatePassword()">Confirm</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+      </ion-footer>
+
+      <ion-content class="ion-padding">
+        <p>
+          Enter the new value for your password in the 2 text fields below. 
+          
+          <!-- Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
+          <strong>cancel</strong> to dismiss this modal. -->
+        </p>
+        <p>Passwords should meet the following requirements:</p>
+
+        <ol>
+          <li>8 or more characters</li>
+          <li>Has upper-case characters</li>
+          <li>Has lower-case characters</li>
+          <li>Has number characters</li>
+        </ol>
+
+        <form (ngSubmit)="updatePassword()" [formGroup]="updatePasswordFormGroup">
+          <ion-item>
+            <ion-input labelPlacement="stacked" type="password" formControlName="password" placeholder="Enter new password">
+              <div slot="label">Password <ion-text color="danger">(Required)</ion-text></div>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            Enter your password again to ensure that there are no typing errors.
+          </ion-item>
+          <ion-item>
+            <ion-input labelPlacement="stacked" type="password" formControlName="passwordConfirmation" placeholder="Repeat new password">
+              <div slot="label">Confirmation <ion-text color="danger">(Required)</ion-text></div>
+            </ion-input>
+          </ion-item>
+        </form>
+
+        &nbsp;
+
+        
+        
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>
