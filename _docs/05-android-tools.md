@@ -21,6 +21,26 @@ adb usb
 ```
 
 
+## logcat filter
+
+adb -s 192.168.79.14:44077 logcat Capacitor/Console:I *:S
+
+adb logcat
+
+adb -s 192.168.79.14:44077 logcat Capacitor/Console:I *:S
+
+`<TAG(eg. Capacitor/Console)>:<Priority-letter>`
+Priority letter could be:
+V: Verbose (lowest priority)
+D: Debug
+I: Info
+W: Warning
+E: Error
+F: Fatal
+S: Silent (highest priority, where nothing is ever printed)
+
+`*:S` means silent all other message types... otherwise logcat is too noisy
+
 # Reference
 
 https://stackoverflow.com/questions/73737019/problem-with-android-wireless-debugging-unexpected-error-during-wi-fi-pairing
