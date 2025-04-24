@@ -1,8 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WebApiService } from './web-api.service';
 import { AppStorageService } from './app-storage.service';
+import { WebApiService } from './web-api.service';
 
 interface UserData {
   name: string;
@@ -13,6 +13,7 @@ interface UserData {
   providedIn: 'root'
 })
 export class AuthenticationService {
+
   async signOut() {
     this.authenticatedUser = null;
     await this.appStorage.remove('authenticatedUserData');
@@ -31,12 +32,23 @@ export class AuthenticationService {
     //super(Capacitor.isNativePlatform() ? nativeAuthOptions : webAuthOptions); 
   }
 
-
   async hasAuthenticatedUser() {
-    console.log("In hasAuthenticatedUser");
-    this.authenticatedUser = await this.appStorage.get<UserData>('authenticatedUserData');
-    console.log("In hasAuthenticatedUser 2");
-    return this.authenticatedUser !== null;
+
+    try {
+
+      this.authenticatedUser = await this.appStorage.get<UserData>('authenticatedUserData');
+
+      console.log(`hasAuthenticatedUser returns ${this.authenticatedUser !== null}; because authenticatedUser is ${this.authenticatedUser}`);
+
+      return this.authenticatedUser !== null;
+
+    } catch (e) {
+
+      console.error(`hasAuthenticatedUser returns false; Exception ${e}`);
+
+      return false;
+    }
+    
   }
 
   authenticateUser(username: string, password: string) {
@@ -54,6 +66,7 @@ export class AuthenticationService {
     //     console.log(data);
     // });
 
+    console.log(`POST TO ${this.webApi.UrlFor("AuthenticateUser")}`);
 
     this.http.post(
       //"https://hci-blazer-func.azurewebsites.net/api/authenticateuser",
@@ -72,7 +85,7 @@ export class AuthenticationService {
 
         await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
 
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/tab2']);
       }
     });
 

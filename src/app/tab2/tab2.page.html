@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Barcode scanner v5
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,29 +14,17 @@
   </ion-header>
 
   <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
-  <ion-button id="open-modal" expand="block">Open</ion-button>
 
-  <ion-modal #modal trigger="open-modal">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Confirm Your Details</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <p>
-          Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
-          <strong>cancel</strong> to dismiss this modal.
-        </p>
-        <ion-button class="ion-margin" shape="round" expand="full" fill="outline" (click)="dismiss()"
-          >Cancel</ion-button
-        >
-        <ion-button class="ion-margin" shape="round" expand="full" (click)="confirm()"
-          >Confirm</ion-button
-        >
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-  
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" aria-label="barcode rawValue" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

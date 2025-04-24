@@ -11,14 +11,6 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'logout',
-    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
-  },
-  {
-    path: 'introduction',
-    loadChildren: () => import('./pages/introduction/introduction.module').then( m => m.IntroductionPageModule)
   }
 ];
 @NgModule({

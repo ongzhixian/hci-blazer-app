@@ -1,26 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>HCI Borrow-&-Returns</ion-title>
+    <ion-title>HCI Blazer App</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <div class="card-container">
 
     <ion-card>
       <ion-row>
         <ion-col size-md="3" size="12" class="ion-padding ion-blue-bkg">
           <img
-            src="https://images.prismic.io/ionicframeworkcom/ac68e1d9-9887-4e5a-9820-9290d06638de_ionic+logo+white+on+blue.png"
+            src="/assets/images/_logo_512x512.jpg"
             alt="Ionic logo"
             loading="lazy"
+            style="background-color: #F8F7F2; border-radius: 2em; padding: 1em;"
           />
         </ion-col>
         <ion-col size-md="9" size="12" class="welcome">
           <ion-card-header>
-            <ion-card-title> Welcome to HCI Borrows & Returns Application </ion-card-title>
+            <ion-card-title> HCI Blazer Application 3 </ion-card-title>
           </ion-card-header>
-
+          
           <ion-card-content>
             <form (ngSubmit)="signIn()" [formGroup]="loginFormGroup">
               <ion-item>
@@ -33,8 +40,10 @@
 
             <ion-button shape="round" color="primary" (click)="signIn()"> Log in </ion-button>
           </ion-card-content>
+
         </ion-col>
       </ion-row>
     </ion-card>
   </div>
+
 </ion-content>

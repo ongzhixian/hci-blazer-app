@@ -1,5 +1,25 @@
 # Ionic CLI
 
+## Project setup
+
+At C:\src\github.com\ongzhixian
+run `ionic start`
+
+npm install @capacitor/camera @capacitor/preferences @capacitor/filesystem
+ionic serve --ssl --prod
+ionic build
+ionic cap add ios
+ionic cap add android
+ionic cap copy
+ionic cap sync
+ionic cap open android
+
+
+npm install -g @ionic/cli native-run cordova-res
+ionic cordova resources
+https://ionic.io/blog/automating-icons-and-splash-screens
+
+
 ## tldr;
 
 ionic generate page pages/login
@@ -8,7 +28,7 @@ ionic generate service services/authentication
 ionic generate guard guards/auth --implements CanLoad
 ionic generate guard guards/intro --implements CanLoad
 ionic generate guard guards/autoLogin --implements CanLoad
-ionic generate interceptor interceptors/credentials
+ng generate interceptor interceptors/credentials
 
 ## 
 
@@ -77,6 +97,9 @@ ionic cap sync
 
 ionic g service services/photo
 
+ionic generate guard guards/auth
+
+
 ## Support for mobile
 
 ionic cap add ios
@@ -97,10 +120,25 @@ npm uninstall -g ionic
 npm uninstall -g @ionic/cli
 npm install -g @ionic/cli@6.20.9
 
+npm install @ionic/storage-angular
+
 
 For other stuff, just a sidenote:
 npm install @ionic/angular@v6-lts
 npm install @ionic/vue@v6-lts @ionic/vue-router@v6-lts
+npm install @ionic/storage-angular
+
+## Live Reload
+
+adb devices 
+
+native-run android --list
+
+$env:ANDROID_SDK_ROOT="C:\Apps\Android\sdk"
+
+ionic cap run android --list
+
+ionic cap run android -l --external
 
 ## References
 

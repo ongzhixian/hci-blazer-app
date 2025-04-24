@@ -6,9 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
-
-import { credentialsInterceptor } from './interceptors/credentials.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
@@ -19,11 +17,8 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     , AppRoutingModule
     , HttpClientModule
     , IonicStorageModule.forRoot()
-    ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-    , provideHttpClient(withInterceptors([credentialsInterceptor]))
   ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

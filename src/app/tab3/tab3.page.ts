@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { IonModal } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-tab3',
@@ -17,15 +17,14 @@ export class Tab3Page {
     passwordConfirmation: ['password12345', [Validators.required, Validators.minLength(6)]]
   });
 
-  constructor(private authenticationService: AuthenticationService
-    , private fb: FormBuilder
-  ) {}
+  constructor(
+    private authenticationService: AuthenticationService
+    , private fb: FormBuilder) { }
 
   signOut() {
     this.authenticationService.signOut();
   }
-
-  // change-password-modal
+    // change-password-modal
 
   // confirm() {
   //   this.modal.dismiss(null, 'confirm');
@@ -40,4 +39,5 @@ export class Tab3Page {
     console.log(`In updatePassword() ${this.updatePasswordFormGroup.value.password} ${this.updatePasswordFormGroup.value.passwordConfirmation}`);
     this.modal.dismiss(null, 'confirm');
   }
+  
 }
