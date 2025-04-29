@@ -9,6 +9,11 @@ interface UserData {
   age: number;
 }
 
+interface AuthTicket {
+  is_valid: boolean;
+  username: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +34,7 @@ export class AuthenticationService {
     private appStorage: AppStorageService,
     private webApi: WebApiService
   ) {
-    //super(Capacitor.isNativePlatform() ? nativeAuthOptions : webAuthOptions); 
+    //super(Capacitor.isNativePlatform() ? nativeAuthOptions : webAuthOptions);
   }
 
   async hasAuthenticatedUser() {
@@ -48,7 +53,7 @@ export class AuthenticationService {
 
       return false;
     }
-    
+
   }
 
   authenticateUser(username: string, password: string) {
@@ -66,27 +71,37 @@ export class AuthenticationService {
     //     console.log(data);
     // });
 
-    console.log(`POST TO ${this.webApi.UrlFor("AuthenticateUser")}`);
+    console.log(`POST TO ${this.webApi.UrlFor("AUTHENTICATE_USER_CREDENTIAL")}`);
 
-    this.http.post(
+    this.http.post<AuthTicket>(
       //"https://hci-blazer-func.azurewebsites.net/api/authenticateuser",
-      this.webApi.UrlFor("AuthenticateUser"),
+      this.webApi.UrlFor("AUTHENTICATE_USER_CREDENTIAL"),
       { username, password },
-      { headers, responseType: 'text' }
+      { headers, responseType: 'json' }
     ).subscribe(async data => {
       console.log(data);
-      if (data === "AuthenticUser") {
+      console.log("data is_valid", data.is_valid);
+      if (data.is_valid) {
 
-        // Parse data
-        this.authenticatedUser = {
-          name: 'zhixian',
-          age: 30
-        };
-
-        await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
-
-        this.router.navigate(['/tabs/tab2']);
+          this.authenticatedUser = {
+            name: data.username,
+            age: 30
+          };
+          await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
+          this.router.navigate(['/tabs/tab2']);
       }
+      // if (data === "AuthenticUser") {
+      //
+      //   // Parse data
+      //   this.authenticatedUser = {
+      //     name: 'zhixian',
+      //     age: 30
+      //   };
+      //
+      //   await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
+      //
+      //   this.router.navigate(['/tabs/tab2']);
+      // }
     });
 
 

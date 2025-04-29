@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'hci-blazer-app',
+  appId: 'hci-blazer.readyperfectly.com',
+  appName: 'HCI Blazer',
   webDir: 'www'
 };
 

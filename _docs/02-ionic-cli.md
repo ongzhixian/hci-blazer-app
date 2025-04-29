@@ -135,11 +135,19 @@ adb devices
 native-run android --list
 
 $env:ANDROID_SDK_ROOT="C:\Apps\Android\sdk"
+$env:ANDROID_SDK_ROOT="C:\Apps\android-sdk"
 
 ionic cap run android --list
 
 ionic cap run android -l --external
 
+ionic cap run android -l --external RRCWC02MBXX
+
+ionic cap run android --target=RRCWC02MBXX --verbose
+
+ionic cap run android --target=RRCWC02MBXX
+
+ionic cap run android --target=RRCWC02MBXX
 ## References
 
 
