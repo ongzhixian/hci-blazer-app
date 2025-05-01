@@ -5,7 +5,7 @@ import {AlertController } from '@ionic/angular';
 import {Barcode, BarcodeFormat, BarcodeScanner, ScanOptions} from "@capacitor-mlkit/barcode-scanning";
 
 import {LoanService} from "../services/loan.service";
-import {BorrowMessage, InventoryItem} from "../models/borrow-message";
+import {BorrowMessage, InventoryItem, OperationResponseMessage} from "../models/borrow-message";
 
 @Component({
   selector: 'app-tab1',
@@ -90,9 +90,7 @@ export class Tab1Page {
       return;
     }
 
-    const { barcodes } = await BarcodeScanner.scan({
-      formats: [BarcodeFormat.QrCode],
-    });
+    const { barcodes } = await BarcodeScanner.scan(this.scanItemCodeOptions);
 
     if (barcodes.length === 0) return;
 
@@ -104,61 +102,50 @@ export class Tab1Page {
   addItem() {
     this.loanService.addItem({
       itemCode : this.addItemFormGroup.value['itemCode']
-    }).subscribe(async data => {
-      const toast = await this.toastController.create({
-        message: data.message,
-        duration: 1500,
-        position: 'bottom',
-        color: data.success ? 'success' : 'warning'
-      });
-      await toast.present();
-    });
+    }).subscribe(async data => this.displayToastNotification(data));
   }
 
   // Reference code --
 
   inventoryItemList: InventoryItem[] = [];
-
   barcodes: Barcode[] = [];
 
-  async addByScanningItem(): Promise<void> {
+  async scanAndRegisterItemCode(): Promise<void> {
     const granted = await this.requestPermissions();
     if (!granted) {
       this.presentAlert();
       return;
     }
 
-    let scanOptions:ScanOptions = {
-      formats: [BarcodeFormat.QrCode, BarcodeFormat.Code39],
-
-    }
-
-
-    // const listener = await BarcodeScanner.addListener(
-    //   'barcodeScanned',
-    //   async result => {
-    //     console.log('SCANNED BARCODE is', result.barcode);
-    //   },
-    // );
-    //
-    // await BarcodeScanner.startScan();
     let continueScan = true;
 
     while (continueScan) {
-      const { barcodes } = await BarcodeScanner.scan();
-
-      barcodes.forEach((barcode) => {
-        console.log(`barcode ${barcode.format} | val=${barcode.valueType} | disp=${barcode.displayValue} | raw=${barcode.rawValue} `);
-      });
+      const { barcodes } = await BarcodeScanner.scan(this.scanItemCodeOptions);
 
       if (barcodes.length === 0) continueScan = false;
-    }
 
-    //this.barcodes.push(...barcodes);
+      this.loanService.addItem({
+        itemCode : barcodes[0].displayValue
+      }).subscribe(async data => this.displayToastNotification(data));
+    }
   }
 
 
   // UTILITY FUNCTIONS - FOR SCANNER
+
+  async displayToastNotification(data:OperationResponseMessage): Promise<void> {
+    const toast = await this.toastController.create({
+      message: data.message,
+      duration: 1500,
+      position: 'bottom',
+      color: data.success ? 'success' : 'warning'
+    });
+    await toast.present();
+  }
+
+  scanItemCodeOptions:ScanOptions = {
+    formats: [BarcodeFormat.QrCode],
+  }
 
   async requestPermissions(): Promise<boolean> {
     const { camera } = await BarcodeScanner.requestPermissions();
