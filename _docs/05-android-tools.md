@@ -41,7 +41,10 @@ S: Silent (highest priority, where nothing is ever printed)
 
 `*:S` means silent all other message types... otherwise logcat is too noisy
 
+This does not work :-(
 adb -d logcat com.readyperfectly.hciblazer:I *:S
+
+Use this!
 adb -d logcat Capacitor/Console:I *:S
 
 # Reference
