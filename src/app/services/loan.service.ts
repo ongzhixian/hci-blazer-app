@@ -3,10 +3,10 @@ import {BorrowMessage, AddItemMessage, OperationResponseMessage, InventoryItem} 
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {URL_FOR, WebApiService} from "./web-api.service";
 
-interface Bor {
-  is_valid: boolean;
-  username: string;
-}
+// interface Bor {
+//   is_valid: boolean;
+//   username: string;
+// }
 
 @Injectable({
   providedIn: 'root'
