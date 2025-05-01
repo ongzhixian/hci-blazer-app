@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'hci-blazer.readyperfectly.com',
+  appId: 'com.readyperfectly.hci',
   appName: 'HCI Blazer',
   webDir: 'www'
 };
