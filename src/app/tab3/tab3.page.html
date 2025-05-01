@@ -20,6 +20,8 @@
     </ion-toolbar>
   </ion-header>
 
+  <p style="text-align: center">Application Version v{{appVersion}}</p>
+
   <ion-card class="ion-padding">
     <!-- <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" /> -->
     <ion-avatar style="margin: auto;">
@@ -29,7 +31,7 @@
       <ion-card-title>Ong Zhi Xian</ion-card-title>
       <ion-card-subtitle>Zhixian</ion-card-subtitle>
     </ion-card-header>
-  
+
     <ion-card-content>
 
       <ion-list>
@@ -72,7 +74,7 @@
       <ion-card-title>Security</ion-card-title>
       <!-- <ion-card-subtitle>Zhixian</ion-card-subtitle> -->
     </ion-card-header>
-  
+
     <ion-card-content>
       <p>Your password was last updated 3 days ago</p>
 
@@ -95,7 +97,8 @@
     the Javan rhino and one-horned rhino have one horn.
   </p>
 
-  
+
+
   <ion-modal #modal trigger="update-password-modal">
     <ng-template>
       <ion-header>
@@ -121,8 +124,8 @@
 
       <ion-content class="ion-padding">
         <p>
-          Enter the new value for your password in the 2 text fields below. 
-          
+          Enter the new value for your password in the 2 text fields below.
+
           <!-- Click <strong>confirm</strong> to set your name (Jorge) and age (36) or
           <strong>cancel</strong> to dismiss this modal. -->
         </p>
@@ -153,10 +156,10 @@
 
         &nbsp;
 
-        
-        
+
+
       </ion-content>
     </ng-template>
   </ion-modal>
-  
+
 </ion-content>
