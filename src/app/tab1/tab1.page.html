@@ -4,7 +4,7 @@
       Operations
     </ion-title>
 
-    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="handleChange($event)">
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChange($event)">
       <ion-segment-button value="borrow">
         <ion-label>Borrow</ion-label>
       </ion-segment-button>
@@ -27,25 +27,26 @@
 
   <ng-container [ngSwitch]="selectedSegment">
 
-    <form *ngSwitchCase="'borrow'" [formGroup]="borrowItemFormGroup"
-          style="margin-top: 1rem;" >
+    <!-- BORROW SEGMENT -->
+
+    <form *ngSwitchCase="'borrow'" [formGroup]="borrowItemFormGroup" style="margin-top: 1rem;" >
+
       <ion-item>
-        <ion-input labelPlacement="stacked" type="text" formControlName="dataItem1" placeholder="Enter data 1">
-          <div slot="label">Data 1 <ion-text color="danger">(Required)</ion-text></div>
+        <ion-input labelPlacement="stacked" type="text" formControlName="itemCode" placeholder="Item code">
+          <div slot="label">Item code <ion-text color="danger">(Required)</ion-text></div>
         </ion-input>
+        <ion-button (click)="scanItemCode()">Scan</ion-button>
       </ion-item>
 
       <ion-item>
-        <ion-input labelPlacement="stacked" type="text" formControlName="dataItem2" placeholder="Enter data 2">
-          <div slot="label">Data 2 <ion-text color="danger">(Required)</ion-text></div>
+        <ion-input labelPlacement="stacked" type="text" formControlName="userCode" placeholder="NRIC">
+          <div slot="label">Borrower ID <ion-text color="danger">(Required)</ion-text></div>
         </ion-input>
+        <ion-button (click)="scanNricCode()">Scan</ion-button>
       </ion-item>
 
       <div style="text-align: center;margin-top: 1rem;">
-        <ion-button color="primary"
-                    [disabled]="!borrowItemFormGroup.valid"
-                    (click)="borrowItem()"
-        >DO TASK</ion-button>
+        <ion-button color="primary" [disabled]="!borrowItemFormGroup.valid" (click)="borrowItem()">Borrow Item</ion-button>
       </div>
 
     </form>
@@ -78,41 +79,75 @@
 
     </ion-content>
 
+    <!-- RETURN SEGMENT -->
+
     <ion-list *ngSwitchCase="'return'">
       <ion-item>Paul mentioned you in this article</ion-item>
       <ion-item>Adrian mentioned you in a comment</ion-item>
     </ion-list>
 
+
+    <!-- STOCK SEGMENT -->
+
     <ion-content *ngSwitchCase="'stock-take'" style="margin-top: 1rem;">
-      <form [formGroup]="addItemFormGroup">
-        <ion-item>
-          <ion-input labelPlacement="stacked" type="text" formControlName="dataItem1" placeholder="Enter data 1">
-            <div slot="label">Data 1 <ion-text color="danger">(Required)</ion-text></div>
-          </ion-input>
-        </ion-item>
 
-        <div style="text-align: center;margin-top: 1rem;">
-          <ion-button color="primary"
-                      [disabled]="!addItemFormGroup.valid"
-                      (click)="addItem()"
-          >Add</ion-button>
-        </div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Add New Item Code</ion-card-title>
+          <ion-card-subtitle>Use this function to register new item codes into the system</ion-card-subtitle>
+        </ion-card-header>
 
-      </form>
+        <ion-card-content>
 
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Items</ion-label>
-        </ion-list-header>
-        <ion-item *ngFor="let item of this.inventoryItemList">
-          <div>
-            <ion-icon name="radio-button-off-outline" *ngIf="item.borrower_code === null"></ion-icon>
-            <ion-icon name="radio-button-on-outline" *ngIf="item.borrower_code !== null"></ion-icon>
-          </div>&nbsp;
-          <ion-label>{{item.item_code}}, {{item.item_description}}</ion-label>
-        </ion-item>
+          <form [formGroup]="addItemFormGroup">
+            <ion-item>
+              <ion-input labelPlacement="stacked" type="text" formControlName="itemCode" placeholder="Item code">
+                <div slot="label">Item code <ion-text color="danger">(Required)</ion-text></div>
+              </ion-input>
+              <ion-button (click)="scanNewItemCode()">Scan</ion-button>
+            </ion-item>
 
-      </ion-list>
+            <div style="text-align: center;margin-top: 1rem;">
+              <ion-button color="primary" [disabled]="!addItemFormGroup.valid" (click)="addItem()">Add</ion-button>
+            </div>
+          </form>
+        </ion-card-content>
+      </ion-card>
+
+      &nbsp;
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Add New Item Codes (Multiple)</ion-card-title>
+          <ion-card-subtitle>Use this function to scan and register multiple new item codes into the system.</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>
+            Click below button to scan item codes.
+          </p>
+          <ion-button color="primary" (click)="addByScanningItem()">Scan and Auto-Add</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+
+
+
+
+<!--      <ion-list>-->
+<!--        <ion-list-header>-->
+<!--          <ion-label>Items</ion-label>-->
+<!--        </ion-list-header>-->
+<!--        <ion-item *ngFor="let item of this.inventoryItemList">-->
+<!--          <div>-->
+<!--            <ion-icon name="radio-button-off-outline" *ngIf="item.borrower_code === null"></ion-icon>-->
+<!--            <ion-icon name="radio-button-on-outline" *ngIf="item.borrower_code !== null"></ion-icon>-->
+<!--          </div>&nbsp;-->
+<!--          <ion-label>{{item.item_code}}, {{item.item_description}}</ion-label>-->
+<!--        </ion-item>-->
+
+<!--      </ion-list>-->
+
     </ion-content>
 
   </ng-container>
