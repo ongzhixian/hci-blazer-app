@@ -143,7 +143,7 @@ ionic cap run android -l --external
 
 ionic cap run android --target=RRCWC02MBXX --livereload --external --host=localhost --port=4100
 
-ionic cap run android --livereload --external --external-url=http://localhost:4100 --host=localhost --port=4100
+ionic cap run android --target=RRCWC02MBXX --livereload --external --host=localhost --port=4100 --public-host=192.168.79.10
 
 
 ionic cap run android --target=RRCWC02MBXX --verbose

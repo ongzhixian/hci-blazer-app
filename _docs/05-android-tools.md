@@ -41,6 +41,9 @@ S: Silent (highest priority, where nothing is ever printed)
 
 `*:S` means silent all other message types... otherwise logcat is too noisy
 
+adb -d logcat com.readyperfectly.hciblazer:I *:S
+adb -d logcat Capacitor/Console:I *:S
+
 # Reference
 
 https://stackoverflow.com/questions/73737019/problem-with-android-wireless-debugging-unexpected-error-during-wi-fi-pairing

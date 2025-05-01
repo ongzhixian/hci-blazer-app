@@ -4,12 +4,15 @@
       Operations
     </ion-title>
 
-    <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="handleChange($event)">
       <ion-segment-button value="borrow">
         <ion-label>Borrow</ion-label>
       </ion-segment-button>
       <ion-segment-button value="return">
         <ion-label>Return</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="stock-take">
+        <ion-label>Stock</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -24,16 +27,94 @@
 
   <ng-container [ngSwitch]="selectedSegment">
 
-    <ion-list *ngSwitchCase="'borrow'">
-      <ion-item>Nathan liked your message</ion-item>
-      <ion-item>Hashnode retweeted yuor article</ion-item>
-      <ion-item>Marcus liked a message you're mentioned in</ion-item>
-    </ion-list>
+    <form *ngSwitchCase="'borrow'" [formGroup]="borrowItemFormGroup"
+          style="margin-top: 1rem;" >
+      <ion-item>
+        <ion-input labelPlacement="stacked" type="text" formControlName="dataItem1" placeholder="Enter data 1">
+          <div slot="label">Data 1 <ion-text color="danger">(Required)</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" type="text" formControlName="dataItem2" placeholder="Enter data 2">
+          <div slot="label">Data 2 <ion-text color="danger">(Required)</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <div style="text-align: center;margin-top: 1rem;">
+        <ion-button color="primary"
+                    [disabled]="!borrowItemFormGroup.valid"
+                    (click)="borrowItem()"
+        >DO TASK</ion-button>
+      </div>
+
+    </form>
+
+    <ion-content class="ion-padding" *ngSwitchCase="'borrow2'">
+
+      <ion-input
+        type="text"
+        fill="solid"
+        label="Data 1"
+        labelPlacement="floating"
+        helperText="Enter a valid data 1"
+        errorText="Invalid data 1"
+        [required]="true"
+      ></ion-input>
+
+      <ion-input
+        type="text"
+        fill="solid"
+        label="Data 2"
+        labelPlacement="floating"
+        helperText="Enter a valid data 2"
+        errorText="Invalid data 2"
+        [required]="true"
+      ></ion-input>
+
+      <div style="margin-top:1rem;">
+        <ion-button (click)="borrowItem()">Borrow</ion-button>
+      </div>
+
+    </ion-content>
 
     <ion-list *ngSwitchCase="'return'">
       <ion-item>Paul mentioned you in this article</ion-item>
       <ion-item>Adrian mentioned you in a comment</ion-item>
     </ion-list>
+
+    <ion-content *ngSwitchCase="'stock-take'" style="margin-top: 1rem;">
+      <form [formGroup]="addItemFormGroup">
+        <ion-item>
+          <ion-input labelPlacement="stacked" type="text" formControlName="dataItem1" placeholder="Enter data 1">
+            <div slot="label">Data 1 <ion-text color="danger">(Required)</ion-text></div>
+          </ion-input>
+        </ion-item>
+
+        <div style="text-align: center;margin-top: 1rem;">
+          <ion-button color="primary"
+                      [disabled]="!addItemFormGroup.valid"
+                      (click)="addItem()"
+          >Add</ion-button>
+        </div>
+
+      </form>
+
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Items</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let item of this.inventoryItemList">
+          <div>
+            <ion-icon name="radio-button-off-outline" *ngIf="item.borrower_code === null"></ion-icon>
+            <ion-icon name="radio-button-on-outline" *ngIf="item.borrower_code !== null"></ion-icon>
+          </div>&nbsp;
+          <ion-label>{{item.item_code}}, {{item.item_description}}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+
   </ng-container>
 
   <!--  <app-explore-container name="Tab 1 page"></app-explore-container>-->

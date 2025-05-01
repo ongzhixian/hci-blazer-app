@@ -6,6 +6,8 @@ import { environment } from 'src/environments/environment';
 })
 export class WebApiService {
 
+
+
   private baseUrl: string;
 
   constructor() {
@@ -26,10 +28,29 @@ export class WebApiService {
         return `${this.baseUrl}/api/AuthenticateUser`
       case "HELLOWORLD":
         return `${this.baseUrl}/api/HelloWorld`
-      case "AUTHENTICATE_USER_CREDENTIAL":
+
+      case URL_FOR.USER_CREDENTIAL_AUTHENTICATION:
         return `${this.baseUrl}/hci-blazer/authenticate-user-credential`
+      case URL_FOR.LIST_ITEMS:
+      case URL_FOR.ADD_ITEM:
+      case URL_FOR.BORROW_ITEM:
+        return `${this.baseUrl}/hci-blazer/item`
       default:
         return "";
     }
   }
 }
+
+export enum URL_FOR {
+  SOME_OTHER_URL1 = "USER_CREDENTIAL_AUTHENTICATION",
+  SOME_OTHER_URL2 = "USER_CREDENTIAL_AUTHENTICATION",
+  SOME_OTHER_URL3 = "USER_CREDENTIAL_AUTHENTICATION",
+  USER_CREDENTIAL_AUTHENTICATION = "USER_CREDENTIAL_AUTHENTICATION",
+  ADD_ITEM = "ADD_ITEM",
+  GET_ITEM = "GET_ITEM",
+  LIST_ITEMS = "LIST_ITEMS",
+  BORROW_ITEM = "BORROW_ITEM",
+  RETURN_ITEM = "RETURN_ITEM",
+  UPDATE_ITEM = "UPDATE_ITEM",
+
+};

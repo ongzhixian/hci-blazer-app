@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppStorageService } from './app-storage.service';
-import { WebApiService } from './web-api.service';
+import {URL_FOR, WebApiService} from './web-api.service';
 
 interface UserData {
   name: string;
@@ -71,11 +71,11 @@ export class AuthenticationService {
     //     console.log(data);
     // });
 
-    console.log(`POST TO ${this.webApi.UrlFor("AUTHENTICATE_USER_CREDENTIAL")}`);
+    console.log(`POST TO ${this.webApi.UrlFor(URL_FOR.USER_CREDENTIAL_AUTHENTICATION)}`);
 
     this.http.post<AuthTicket>(
       //"https://hci-blazer-func.azurewebsites.net/api/authenticateuser",
-      this.webApi.UrlFor("AUTHENTICATE_USER_CREDENTIAL"),
+      this.webApi.UrlFor(URL_FOR.USER_CREDENTIAL_AUTHENTICATION),
       { username, password },
       { headers, responseType: 'json' }
     ).subscribe(async data => {
