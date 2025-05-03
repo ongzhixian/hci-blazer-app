@@ -56,6 +56,20 @@ export class AuthenticationService {
 
   }
 
+  getAuthenticatedUser() {
+
+    try {
+      return this.authenticatedUser;
+
+    } catch (e) {
+
+      console.error(`hasAuthenticatedUser returns false; Exception ${e}`);
+
+      return null;
+    }
+
+  }
+
   authenticateUser(username: string, password: string) {
     // https://hci-blazer-func.azurewebsites.net/api/HelloWorldw
     // "https://ongzhixian.github.io/BasicAngularApp/sampleData/shipping.json"
