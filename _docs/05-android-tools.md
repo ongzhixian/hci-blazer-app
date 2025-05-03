@@ -7,8 +7,9 @@ https://developer.android.com/tools/adb#wireless
 
 
 ```
-adb tcpip 5555
-adb connect 192.168.0.101:5555
+adb tcpip 5555                    # Select port 5555 as the port that devices will connect to on your PC
+adb connect 192.168.0.101:5555    # Connect to device; IP address and port from device's wireless debugging page on Android 
+adb connect 192.168.79.5:39313
 
 funcadb disconnect 192.168.0.101:5555
 
