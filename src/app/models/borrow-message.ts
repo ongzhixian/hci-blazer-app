@@ -2,9 +2,6 @@ export interface BorrowMessage {
   userCode: string;
   itemCode: string;
 }
-export interface AddItemMessage {
-  itemCode: string;
-}
 
 export interface OperationResponseMessage {
   success: boolean;

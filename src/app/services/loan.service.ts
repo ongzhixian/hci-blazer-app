@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BorrowMessage, AddItemMessage, OperationResponseMessage, InventoryItem} from "../models/borrow-message";
+import {BorrowMessage, OperationResponseMessage, InventoryItem} from "../models/borrow-message";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {URL_FOR, WebApiService} from "./web-api.service";
+import {AuthenticationService} from "./authentication.service";
 
 // interface Bor {
 //   is_valid: boolean;
@@ -15,10 +16,10 @@ export class LoanService {
 
   headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
-
   constructor(
     private http: HttpClient
     , private webApi: WebApiService
+    , private authenticationService: AuthenticationService
   ) {
     //this.headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   }
@@ -45,12 +46,17 @@ export class LoanService {
   }
 
   addItem(message:AddItemMessage) {
-    console.log('Add item', message);
+    let authUserData = this.authenticationService.getAuthenticatedUser()
+
+    console.log('Add item', message, authUserData);
+
     return this.http.post<OperationResponseMessage>(
       this.webApi.UrlFor(URL_FOR.ADD_ITEM),
       message,
       { headers: this.headers, responseType: 'json' }
     );
+
+
   } // end addItem
 
   returnItem(id:string) {}
@@ -62,4 +68,10 @@ export class LoanService {
     );
 
   }
+}
+
+// LOAN SERVICES MESSAGES
+
+export interface AddItemMessage {
+  itemCode: string;
 }
