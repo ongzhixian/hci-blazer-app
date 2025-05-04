@@ -6,6 +6,8 @@ import {Barcode, BarcodeFormat, BarcodeScanner, ScanOptions} from "@capacitor-ml
 
 import {LoanService} from "../services/loan.service";
 import {BorrowMessage, InventoryItem, OperationResponseMessage} from "../models/borrow-message";
+import {AppStorageService} from "../services/app-storage.service";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-tab1',
@@ -19,7 +21,7 @@ export class Tab1Page {
     , private alertController: AlertController
     , private toastController: ToastController
     , private loanService: LoanService
-
+    , private authenticationService: AuthenticationService,
   ) {}
 
   // BORROW SEGMENT
