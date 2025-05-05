@@ -81,10 +81,19 @@
 
     <!-- RETURN SEGMENT -->
 
-    <ion-list *ngSwitchCase="'return'">
-      <ion-item>Paul mentioned you in this article</ion-item>
-      <ion-item>Adrian mentioned you in a comment</ion-item>
-    </ion-list>
+    <ion-content *ngSwitchCase="'return'" style="margin-top: 1rem;">
+
+      <p>
+        <ion-button (click)="simulateBorrow()">Borrow</ion-button>
+      </p>
+
+      <ion-list>
+        <ion-item>Paul mentioned you in this article</ion-item>
+        <ion-item>Adrian mentioned you in a comment</ion-item>
+      </ion-list>
+
+    </ion-content>
+
 
 
     <!-- STOCK SEGMENT -->

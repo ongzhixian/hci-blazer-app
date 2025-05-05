@@ -24,11 +24,17 @@ export class LoanService {
     //this.headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   }
 
+  // This should match to backend
+  // See: class UpdateInventoryItemMessage(Message)
+  // BORROW_MESSAGE_TYPE = 'BORROW'
+  // RETURN_MESSAGE_TYPE = 'RETURN'
+  // EXTEND_BORROW_PERIOD_MESSAGE_TYPE = 'EXTEND-BORROW-PERIOD'
+
   borrowItem(message:BorrowMessage) {
     //const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
     this.http.patch(
       this.webApi.UrlFor(URL_FOR.BORROW_ITEM),
-      { updateType: 'new-borrow', ...message },
+      { updateType: 'BORROW', ...message },
       { headers: this.headers, responseType: 'json' }
     ).subscribe(async data => {
       console.log('Response data', data);
