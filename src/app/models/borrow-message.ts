@@ -1,11 +1,39 @@
 export interface BorrowMessage {
-  userCode: string;
+  borrowerCode: string;
   itemCode: string;
+  userCode: string;
+}
+
+// type Owl = { nocturnal: true } & BirdType;
+// export type NewBorrowMessage = BorrowMessage & {
+//   action: 'borrow'
+// }
+// export type ExtendBorrowMessage = BorrowMessage & {
+//   action: 'extend-borrow'
+// }
+//
+// export interface GenericMessage {
+//   messageType: string;
+// }
+//
+//
+// function createNewMessage(parameter: Omit<GenericMessage, 'messageType'>): GenericMessage {
+//   return {
+//     messageType: 'animal',
+//     ...parameter,
+//   };
+// }
+
+export interface AddItemMessage {
+  itemCode: string;
+  userCode: string;
 }
 
 export interface OperationResponseMessage {
-  success: boolean;
+  is_success: boolean;
   message: string;
+  data_object: any;
+
 }
 
 export interface InventoryItem {
