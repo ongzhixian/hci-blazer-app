@@ -51,50 +51,22 @@
 
     </form>
 
-    <ion-content class="ion-padding" *ngSwitchCase="'borrow2'">
-
-      <ion-input
-        type="text"
-        fill="solid"
-        label="Data 1"
-        labelPlacement="floating"
-        helperText="Enter a valid data 1"
-        errorText="Invalid data 1"
-        [required]="true"
-      ></ion-input>
-
-      <ion-input
-        type="text"
-        fill="solid"
-        label="Data 2"
-        labelPlacement="floating"
-        helperText="Enter a valid data 2"
-        errorText="Invalid data 2"
-        [required]="true"
-      ></ion-input>
-
-      <div style="margin-top:1rem;">
-        <ion-button (click)="borrowItem()">Borrow</ion-button>
-      </div>
-
-    </ion-content>
-
     <!-- RETURN SEGMENT -->
 
-    <ion-content *ngSwitchCase="'return'" style="margin-top: 1rem;">
+    <form *ngSwitchCase="'return'" [formGroup]="returnItemFormGroup" style="margin-top: 1rem;" >
 
-      <p>
-        <ion-button (click)="simulateBorrow()">Borrow</ion-button>
-      </p>
+      <ion-item>
+        <ion-input labelPlacement="stacked" type="text" formControlName="itemCode" placeholder="Item code">
+          <div slot="label">Item code <ion-text color="danger">(Required)</ion-text></div>
+        </ion-input>
+        <ion-button (click)="scanReturnItemCode()">Scan</ion-button>
+      </ion-item>
 
-      <ion-list>
-        <ion-item>Paul mentioned you in this article</ion-item>
-        <ion-item>Adrian mentioned you in a comment</ion-item>
-      </ion-list>
+      <div style="text-align: center;margin-top: 1rem;">
+        <ion-button color="primary" [disabled]="!returnItemFormGroup.valid" (click)="returnItem()">Return Item</ion-button>
+      </div>
 
-    </ion-content>
-
-
+    </form>
 
     <!-- STOCK SEGMENT -->
 

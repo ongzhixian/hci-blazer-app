@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import {BorrowMessage, OperationResponseMessage, InventoryItem} from "../models/borrow-message";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {BorrowMessage, OperationResponseMessage, InventoryItem, ReturnMessage} from "../models/borrow-message";
+import {HttpClient, HttpHeaders, HttpErrorResponse} from "@angular/common/http";
 import {URL_FOR, WebApiService} from "./web-api.service";
 import {AuthenticationService} from "./authentication.service";
-
-// interface Bor {
-//   is_valid: boolean;
-//   username: string;
-// }
+import {throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,25 +27,33 @@ export class LoanService {
   // RETURN_MESSAGE_TYPE = 'RETURN'
   // EXTEND_BORROW_PERIOD_MESSAGE_TYPE = 'EXTEND-BORROW-PERIOD'
 
+  private handleHttpError(error: HttpErrorResponse) {
+    if (error.status === 500) {
+      console.error('Server error:', error);
+      return throwError(() => new Error('Something went wrong on the server.'))
+    } else { // Handle other errors
+      console.error('An error occurred:', error);
+      return throwError(() => new Error('An error occurred. Please try again later.'))
+    }
+  }
+
   borrowItem(message:BorrowMessage) {
     //const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    this.http.patch(
+    return this.http.patch<OperationResponseMessage>(
       this.webApi.UrlFor(URL_FOR.BORROW_ITEM),
       { updateType: 'BORROW', ...message },
       { headers: this.headers, responseType: 'json' }
-    ).subscribe(async data => {
-      console.log('Response data', data);
-      // console.log("data is_valid", data.is_valid);
-      // if (data.is_valid) {
-      //
-      //   this.authenticatedUser = {
-      //     name: data.username,
-      //     age: 30
-      //   };
-      //   await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
-      //   this.router.navigate(['/tabs/tab2']);
-      // }
-    });
+    ).pipe(
+      catchError(this.handleHttpError)
+    );
+  }
+
+  returnItem(message:ReturnMessage) {
+    return this.http.patch<OperationResponseMessage>(
+      this.webApi.UrlFor(URL_FOR.RETURN_ITEM),
+      { updateType: 'RETURN', ...message },
+      { headers: this.headers, responseType: 'json' }
+    );
   }
 
   addItem(message:AddItemMessage) {
@@ -65,7 +70,7 @@ export class LoanService {
 
   } // end addItem
 
-  returnItem(id:string) {}
+
 
   getItemById(id:string) {}
 

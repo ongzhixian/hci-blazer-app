@@ -4,6 +4,11 @@ export interface BorrowMessage {
   userCode: string;
 }
 
+export interface ReturnMessage {
+  itemCode: string;
+  userCode: string;
+}
+
 // type Owl = { nocturnal: true } & BirdType;
 // export type NewBorrowMessage = BorrowMessage & {
 //   action: 'borrow'

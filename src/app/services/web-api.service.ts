@@ -6,8 +6,6 @@ import { environment } from 'src/environments/environment';
 })
 export class WebApiService {
 
-
-
   private baseUrl: string;
 
   constructor() {
@@ -34,6 +32,7 @@ export class WebApiService {
       case URL_FOR.LIST_ITEMS:
       case URL_FOR.ADD_ITEM:
       case URL_FOR.BORROW_ITEM:
+      case URL_FOR.RETURN_ITEM:
         return `${this.baseUrl}/hci-blazer/item`
       default:
         return "";
@@ -52,5 +51,4 @@ export enum URL_FOR {
   BORROW_ITEM = "BORROW_ITEM",
   RETURN_ITEM = "RETURN_ITEM",
   UPDATE_ITEM = "UPDATE_ITEM",
-
 };

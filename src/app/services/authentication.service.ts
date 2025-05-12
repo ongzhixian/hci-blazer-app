@@ -57,17 +57,21 @@ export class AuthenticationService {
   }
 
   getAuthenticatedUser() {
-
     try {
       return this.authenticatedUser;
-
     } catch (e) {
-
       console.error(`hasAuthenticatedUser returns false; Exception ${e}`);
-
       return null;
     }
+  }
 
+  getAuthenticatedUserName() {
+    try {
+      return this.authenticatedUser?.name ?? 'Anonymous';
+    } catch (e) {
+      console.error(`hasAuthenticatedUser returns false; Exception ${e}`);
+      return 'AnonymousErr';
+    }
   }
 
   authenticateUser(username: string, password: string) {
@@ -102,7 +106,7 @@ export class AuthenticationService {
             age: 30
           };
           await this.appStorage.set('authenticatedUserData', this.authenticatedUser);
-          this.router.navigate(['/tabs/tab2']);
+          this.router.navigate(['/tabs/tab1']);
       }
       // if (data === "AuthenticUser") {
       //
